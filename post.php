@@ -1,3 +1,29 @@
+<?php require_once 'models/blogpost.php';
+
+
+$blogpost_obj= new blogpost();
+
+if (isset($_POST['submit'])) {
+
+    $title=$_POST['title'];
+    $description=$_POST['description'];
+
+
+
+    $dataToInsert = array(
+        'title' => $title,
+        'description' => $description,
+        'content' => "This is a sample test content",
+        'created_by' => 1
+    ); 
+
+
+    $blogpost_obj->insert($dataToInsert);
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -46,66 +72,66 @@
                             </header>
                             <!-- Post content-->
                             <section class="mb-5">
-                                <form>
+                                <form action="post.php" method="post">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Title</label>
-                                        <input type="text" class="form-control mb-1">
+                                        <input type="text" class="form-control mb-1" name="title">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Description</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Content</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1 mt-3">Categories</label>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="Web Design" id="defaultCheck1" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck1">
-                                                      Default checkbox
+                                                      Web Design
                                                     </label>
-                                                </div>
+                                                </div>  
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                                    <input class="form-check-input" type="checkbox" value="HTML" id="defaultCheck2" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck2">
-                                                      Default checkbox
+                                                      HTML
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                                    <input class="form-check-input" type="checkbox" value="Java Script" id="defaultCheck3" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck3">
-                                                      Default checkbox
+                                                      Java Script
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" value="CSS" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck4">
-                                                      Default checkbox
+                                                      CSS
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                                    <input class="form-check-input" type="checkbox" value="Tutorials" id="defaultCheck5" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck5">
-                                                        Default checkbox
+                                                        Tutorial
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                                    <input class="form-check-input" type="checkbox" value="Freebies" id="defaultCheck6" name="checkbox">
                                                     <label class="form-check-label" for="defaultCheck6">
-                                                        Default checkbox
+                                                        Freebies
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary mt-5">Post</button>
+                                    <button type="submit" class="btn btn-primary mt-5" name="submit">Post</button>
                                 </form>
                             </section>
                         </div>
