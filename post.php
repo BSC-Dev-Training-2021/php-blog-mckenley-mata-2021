@@ -1,26 +1,6 @@
 <?php require_once 'models/blogpost.php';
-
-
-$blogpost_obj= new blogpost();
-
-if (isset($_POST['submit'])) {
-
-    $title=$_POST['title'];
-    $description=$_POST['description'];
-
-
-
-    $dataToInsert = array(
-        'title' => $title,
-        'description' => $description,
-        'content' => "This is a sample test content",
-        'created_by' => 1
-    ); 
-
-
-    $blogpost_obj->insert($dataToInsert);
-
-}
+require_once 'models/category_type.php';
+require_once 'post_controler.php';
 ?>
 
 
@@ -48,11 +28,12 @@ if (isset($_POST['submit'])) {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="post.html">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" href="messages.html"><i class="fa fa-envelope-o"></i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="post.php">Post</a></li>
+                        <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -72,10 +53,10 @@ if (isset($_POST['submit'])) {
                             </header>
                             <!-- Post content-->
                             <section class="mb-5">
-                                <form action="post.php" method="post">
+                                <form action="post.php" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Title</label>
-                                        <input type="text" class="form-control mb-1" name="title">
+                                        <input type="text" class="form-control mb-1" name="title" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Description</label>
@@ -86,48 +67,30 @@ if (isset($_POST['submit'])) {
                                         <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
                                     </div>
                                     <div class="form-group">
+                                        
+                                            <input class="form-control mb-1" type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg" >
+                                            
+
+                                    </div>
+                                    <div class="form-group">
                                         <label class="mb-1 mt-3">Categories</label>
                                         <div class="row">
+                                            <?php 
+
+                                            $blogpost_obj=new category_types();
+                                            $result=$blogpost_obj->findAll();
+                                            foreach ($result as $value) {
+
+                                               ?>
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Web Design" id="defaultCheck1" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                      Web Design
+                                                    <input class="form-check-input" type="checkbox" value="<?php echo $value['id']; ?>" id="checkbox<?php echo $value['id']; ?>" name="checkbox[]">
+                                                    <label class="form-check-label" for="checkbox<?php echo $value['id']; ?>">
+                                                      <?php echo $value['name']; ?>
                                                     </label>
                                                 </div>  
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="HTML" id="defaultCheck2" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck2">
-                                                      HTML
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Java Script" id="defaultCheck3" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck3">
-                                                      Java Script
-                                                    </label>
-                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" value="CSS" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck4">
-                                                      CSS
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Tutorials" id="defaultCheck5" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck5">
-                                                        Tutorial
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Freebies" id="defaultCheck6" name="checkbox">
-                                                    <label class="form-check-label" for="defaultCheck6">
-                                                        Freebies
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     
