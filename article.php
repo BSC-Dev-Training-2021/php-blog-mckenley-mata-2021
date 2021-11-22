@@ -65,9 +65,9 @@
                             $n_comment= new blog_post_comments();
 
                             $dataTo_Insert = array(
-                                'comment'=> $_POST['user-comment'],
-                                'user_id'=> $user_id,
-                                'blog_post_id'=>$id
+                                'comment' => $_POST['user-comment'],
+                                'user_id' => $user_id,
+                                'blog_post_id' => $id
                             );
                               $n_comment->insert($dataTo_Insert);
                         }
@@ -119,14 +119,13 @@
                                 </form>
                                 <!-- Comment with nested comments-->
                                     <?php require_once 'models/blog_post_comments.php';
-                                        $int_num=(int) $_GET['id'];
+                                        $int_num = (int) $_GET['id'];
                     
-                                        $blog_post_comments=new blog_post_comments();
-                                        $result1=$blog_post_comments->findComments($int_num);
+                                        $blog_post_comments = new blog_post_comments();
+                                        $blog_post_result = $blog_post_comments->findComments($int_num);
                                         
-                                        foreach ($result1 as $value) { /// loop all the data from database
+                                        foreach ($blog_post_result as $value) { /// loop all the data from database
                                            
-                                            
                                     ?>
                                 <div class="d-flex mb-4">
                                     <!-- Parent comment-->

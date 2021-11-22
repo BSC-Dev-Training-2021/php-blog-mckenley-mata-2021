@@ -11,14 +11,18 @@
         		'params' => array(
         			'blog_id' => $blog_id
         		),
-        		'returnFields' = array(
+        		'returnFields' => array(
         			'comments',
         			'blog_id',
         			'id'
         			//'blog_post_categories.*'
+        		),
+        		'rawparams' => array(
+        			'comments IS NOT NULL'
         		)
-        	); 
-        	//$this->innerJoin("INNER JOIN blog_post_categories ON blog_post_categories.category_id = category_types.id")
+        	);
+
+        	$this->innerJoin("INNER JOIN blog_post_categories ON blog_post_categories.category_id = category_types.id");
         	$this->findAll($options);
         }
 	}
