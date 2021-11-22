@@ -163,20 +163,19 @@
                         <div class="card-header">Categories</div>
                         <div class="card-body">
                             <div class="row">
+                                <?php 
+                                    require_once 'models/category_type.php';
+                                    $category_types = new category_types();
+                                    $cat_types = $category_types->findAll();
+
+                                    foreach ($cat_types as $category_values) {
+                                
+                                 ?>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
+                                        <li><a href="#!"><?php echo $category_values['name']; ?></a></li>
                                 </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
