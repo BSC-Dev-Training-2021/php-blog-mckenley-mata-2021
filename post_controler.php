@@ -1,6 +1,7 @@
 <?php 
 
 
+
 $blogpost_obj= new blogpost();
 $blog_post_categories=new blog_post_categories();
 
@@ -25,9 +26,7 @@ if (isset($_POST['submit'])) {
         'description' => $description,
         'content' => $content,
         'created_by' => 1,
-        
         'img_link'=> $nameimg
- 
     ); 
 
     $blogpost_obj->insert($dataToInsert);

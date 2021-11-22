@@ -76,9 +76,9 @@ require_once 'post_controler.php';
                                         <label class="mb-1 mt-3">Categories</label>
                                         <div class="row">
                                             <?php 
-
-                                            $blogpost_obj=new category_types();
-                                            $result=$blogpost_obj->findAll();
+                                                $blogpost_obj=new category_types();
+                                                $result=$blogpost_obj->findAll();
+                                            
                                             foreach ($result as $value) {
 
                                                ?>

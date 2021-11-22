@@ -48,8 +48,7 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <?php require_once 'models/blogpost.php';
-
-
+                    
                     $blogpost_obj= new blogpost();
                     $results=$blogpost_obj->findAll();
 
@@ -63,7 +62,7 @@
                             <div class="small text-muted"><?php echo $value['date_created']; ?></div>
                             <h2 class="card-title"><?php echo $value['title']; ?></h2>
                             <p class="card-text"><?php echo $value['description']; ?></p>
-                            <form method="get">
+                            <form method="post">
                                 <a class="btn btn-primary" href="article.php?id=<?php echo $value['id']; ?> ">Read more →</a>
                             </form>
                         </div>
@@ -148,20 +147,19 @@
                         <div class="card-header">Categories</div>
                         <div class="card-body">
                             <div class="row">
+                                <?php 
+                                    require_once 'models/category_type.php';
+                                    $category_types = new category_types();
+                                    $cat_types = $category_types->findAll();
+
+                                    foreach ($cat_types as $category_values) {
+                                
+                                 ?>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
+                                        <li><a href="#!"><?php echo $category_values['name']; ?></a></li>
                                 </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -2,10 +2,10 @@
 require_once 'model.php';
 require_once 'models/blog_post_categories.php';
 
-    class blogpost extends model {
+    class user extends model {
 
         function __construct(){
-            parent::__construct("blog_post");
+            parent::__construct("user");
         }
 
     }

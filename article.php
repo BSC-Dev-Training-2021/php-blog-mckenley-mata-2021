@@ -37,103 +37,112 @@
                 <div class="col-lg-8">
                     <!-- Post content-->
                     <?php require_once 'models/blogpost.php';
-
-                    if (isset($_GET['id'])) {
-                    $id=$_GET['id'];
-
-                    $blogpost_obj= new blogpost();
-                    
-                    
-                    $find_id_results=$blogpost_obj->findById($id);
-
-                    
-                    }
+                        require_once 'models/user.php';
+                        require_once 'models/category_type.php';
+                        require_once 'models/blog_post_comments.php';
 
 
-                    foreach ($variable as $key => $value) {
-                        // code...
-                    }
-                    
 
-                    foreach ($find_id_results as $value) { /// loop all the data from database
-                        
+
+
+                        if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        $user_id = 1;
+                        $blogpost_obj = new blogpost();
+
+         
+
+
+                        $blogPostData = $blogpost_obj->findById($id);
+                        $user_obj = new user();
+                        $userData = $user_obj->findById($user_id);
+
+     
+
+                        }
+
+                        if (isset($_POST['user-comment'])) {
+                            $n_comment= new blog_post_comments();
+
+                            $dataTo_Insert = array(
+                                'comment'=> $_POST['user-comment'],
+                                'user_id'=> $user_id,
+                                'blog_post_id'=>$id
+                            );
+                              $n_comment->insert($dataTo_Insert);
+                        }
+
+
                     ?>
+
+                 
                         <article>
                             <!-- Post header-->
                             <header class="mb-4">
                                 <!-- Post title-->
-                                <h1 class="fw-bolder mb-1"><?php echo $value['title']; ?></h1>
+                                <h1 class="fw-bolder mb-1"><?php echo $blogPostData['title']; ?></h1>
                                 <!-- Post meta content-->
-                                <div class="text-muted fst-italic mb-2">Posted on <?php echo $value['date_created']; ?> by Start Bootstrap</div>
+                                <div class="text-muted fst-italic mb-2">Posted on <?php echo $blogPostData['date_created']; ?> by 
+                                    <?php 
+                                        echo $userData['name'];
+                                     ?>
+
+                                </div>
                                 <!-- Post categories-->
-                                
-                                <?php 
-                                
-
-                                foreach ($ as $key => $value) {
-                                    
-
-                                } ?>
 
                                 <a class="badge bg-secondary text-decoration-none link-light" href="#!">adsadads</a>
 
                             </header>
                             <!-- Preview image figure-->
-                            <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $value['img_link']; ?>" alt="..." /></figure>
+                            <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $blogPostData['img_link']; ?>" alt="..." /></figure>
                             <!-- Post content-->
                             <section class="mb-5">
                                 <p class="fs-5 mb-4">
-                                    <?php echo $value['content']; ?>
+                                    <?php echo $blogPostData['content']; ?>
                                 </p>
                             </section>
                         </article>
-                    <?php } ?>
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
-                                <form class="mb-4">
+
+                                <form class="mb-4" method="post" action="article.php?id=<?php echo $id; ?> ">
                                     <div>
-                                        <textarea class="form-control mb-2" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                                        <textarea class="form-control mb-2" rows="3" placeholder="Join the discussion and leave a comment!" name="user-comment"></textarea>
+
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                                        <button type="submit" class="btn btn-primary" name="submit">Post Comment</button>
                                     </div>
                                 </form>
                                 <!-- Comment with nested comments-->
+                                    <?php require_once 'models/blog_post_comments.php';
+                                        $int_num=(int) $_GET['id'];
+                    
+                                        $blog_post_comments=new blog_post_comments();
+                                        $result1=$blog_post_comments->findComments($int_num);
+                                        
+                                        foreach ($result1 as $value) { /// loop all the data from database
+                                           
+                                            
+                                    ?>
                                 <div class="d-flex mb-4">
                                     <!-- Parent comment-->
+
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                        <!-- Child comment 1-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                            </div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">
+                                                <?php 
+                                                    echo $userData['name'];
+                                                ?>
                                         </div>
-                                        <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When you put money directly to a problem, it makes a good headline.
-                                            </div>
-                                        </div>
+                                            <?php echo $value['comment']; ?>
                                     </div>
+
                                 </div>
-                                <!-- Single comment-->
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                                    </div>
-                                </div>
+                                <?php } ?>                            
                             </div>
                         </div>
                     </section>
