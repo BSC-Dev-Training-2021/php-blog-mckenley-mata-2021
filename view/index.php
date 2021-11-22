@@ -12,8 +12,8 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/font-awesome.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -47,7 +47,7 @@
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
-                    <?php require_once 'models/blogpost.php';
+                    <?php require_once '../application/models/blogpost.php';
                     
                     $blogpost_obj= new blogpost();
                     $results=$blogpost_obj->findAll();
@@ -148,7 +148,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    require_once 'models/category_type.php';
+                                    require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
 

@@ -3,7 +3,8 @@
         public $title;
         public $conn;
         public $id;
-        public $joins;
+        public $joinString;
+        public $innerJoin;
 
         function __construct($tableName){
             $this->conn = mysqli_connect("localhost", "mckenley", "mckenley", "db_blogpost");  
@@ -19,17 +20,30 @@
             $this->joins[] = $joinString;
         }
 
-        function findAll(){
-            $sql = "SELECT * FROM $this->tableName ";
+        function findAll($options = array()){
+            $sql = "SELECT * FROM $this->tableName";
 
-            /* 
-            $joinString = $this->parseJoin();
+            /*$joinString = $this->parseJoin();*/
             
-
-            if($joinString != "") {
+            /*if($joinString != "") {
                 $sql .= $joinString;
+            }*/
+            $whereClauseConditions = [];
+
+            if (isset($options['params'])) {
+                foreach ($options['params'] as $columnName => $data) {
+                    $whereClauseConditions[] = "$columnName = $data";
+                }                    
             }
-            */
+
+            if(isset($options['rawparams']) && count($options['rawparams']) > 0) {
+                $whereClauseConditions = array_merge($whereClauseConditions, $options['rawparams']);    
+            }
+
+            if(count($whereClauseConditions) > 0) {
+                $sql .=" WHERE ".implode(" AND ",$whereClauseConditions);
+            }
+
             $rows = $this->conn->query($sql);
             $result = [];
             if ($rows->num_rows > 0) {
@@ -38,6 +52,7 @@
                 $result[] = $row;
                 }
             } 
+            
             return $result;
         }
 
@@ -71,8 +86,6 @@
    /*     private function parseJoin() {
             return implode(' ', $this->joins);
         }*/
-
-
 /*       function innerJoin($cat){
             $sql = "    SELECT $this->tableName.name
                         FROM $this->tableName

@@ -11,8 +11,8 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/font-awesome.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -36,10 +36,11 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Post content-->
-                    <?php require_once 'models/blogpost.php';
-                        require_once 'models/user.php';
-                        require_once 'models/category_type.php';
-                        require_once 'models/blog_post_comments.php';
+                    <?php 
+                        require_once '../application/models/blogpost.php';
+                        require_once '../application/models/user.php';
+                        require_once '../application/models/category_type.php';
+                        require_once '../application/models/blog_post_comments.php';
 
 
 
@@ -118,12 +119,13 @@
                                     </div>
                                 </form>
                                 <!-- Comment with nested comments-->
-                                    <?php require_once 'models/blog_post_comments.php';
+                                    <?php 
+                                        require_once '../application/models/blog_post_comments.php';
                                         $int_num = (int) $_GET['id'];
                     
                                         $blog_post_comments = new blog_post_comments();
                                         $blog_post_result = $blog_post_comments->findComments($int_num);
-                                        
+
                                         foreach ($blog_post_result as $value) { /// loop all the data from database
                                            
                                     ?>
@@ -164,7 +166,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    require_once 'models/category_type.php';
+                                    require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
 

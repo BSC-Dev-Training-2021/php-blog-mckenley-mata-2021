@@ -1,3 +1,9 @@
+<?php require_once '../application/models/blogpost.php';
+require_once '../application/models/category_type.php';
+require_once '../controler/post_controler.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,8 +17,8 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/font-awesome.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -24,9 +30,10 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="contact.php">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="post.php">Post</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="post.php">Post</a></li>
                         <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -36,30 +43,58 @@
             <div class="row">
                 <div class="col-lg-8 align-self-start">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-8">
                             <!-- Contact Us header-->
-                            <header class="mb-4">
+                            <header class="mb-8">
                                 <!-- Post title-->
-                                <h1 class="fw-bolder mb-1">Contact Us</h1>
+                                <h1 class="fw-bolder mb-1">Create a new blog entry</h1>
                                 <!-- Post meta content-->
-                                <div class="text-muted fst-italic mb-3">We would like to hear from you!</div>
+                                <div class="text-muted fst-italic mb-3">Express your mind!</div>
                             </header>
                             <!-- Post content-->
                             <section class="mb-5">
-                                <form>
+                                <form action="post.php" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="formGroupExampleInput" class="mb-1">Full Name</label>
-                                        <input type="text" class="form-control mb-1" id="formGroupExampleInput" placeholder="">
+                                        <label for="exampleFormControlTextarea1" class="mb-1">Title</label>
+                                        <input type="text" class="form-control mb-1" name="title" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="formGroupExampleInput2" class="mb-1">Email</label>
-                                        <input type="text" class="form-control mb-1" id="formGroupExampleInput2" placeholder="">
+                                        <label for="exampleFormControlTextarea1" class="mb-1">Description</label>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" class="mb-1">Message</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <label for="exampleFormControlTextarea1" class="mb-1">Content</label>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                    <div class="form-group">
+                                        
+                                            <input class="form-control mb-1" type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg" >
+                                            
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mb-1 mt-3">Categories</label>
+                                        <div class="row">
+                                            <?php 
+                                                $blogpost_obj=new category_types();
+                                                $result=$blogpost_obj->findAll();
+                                            
+                                            foreach ($result as $value) {
+
+                                               ?>
+                                            <div class="col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="<?php echo $value['id']; ?>" id="checkbox<?php echo $value['id']; ?>" name="checkbox[]">
+                                                    <label class="form-check-label" for="checkbox<?php echo $value['id']; ?>">
+                                                      <?php echo $value['name']; ?>
+                                                    </label>
+                                                </div>  
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary mt-5" name="submit">Post</button>
                                 </form>
                             </section>
                         </div>
@@ -84,7 +119,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    require_once 'models/category_type.php';
+                                    require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
 
@@ -96,7 +131,6 @@
                                         <li><a href="#!"><?php echo $category_values['name']; ?></a></li>
                                 </div>
                                 <?php } ?>
-                            </div>
                         </div>
                     </div>
                     <!-- Side widget-->

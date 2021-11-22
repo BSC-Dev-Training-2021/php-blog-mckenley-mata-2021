@@ -7,10 +7,10 @@ $blog_post_categories=new blog_post_categories();
 
 if (isset($_POST['submit'])) {
     $checkbox=$_POST['checkbox'];
-    $nameimg ="src/".$_FILES['file']['name'];
+    $nameimg ="../img_src/".$_FILES['file']['name'];
     
 
-    $targetFile = 'src/' . basename($_FILES["file"]["name"]);
+    $targetFile = '../img_src/' . basename($_FILES["file"]["name"]);
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
 
