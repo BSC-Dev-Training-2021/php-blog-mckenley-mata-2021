@@ -6,7 +6,6 @@
             parent::__construct("blog_post_categories");
         }
 
+       
 	}
-
-
  ?>

@@ -43,22 +43,14 @@
                         require_once '../application/models/blog_post_comments.php';
 
 
-
-
-
                         if (isset($_GET['id'])) {
                         $id = $_GET['id'];
                         $user_id = 1;
                         $blogpost_obj = new blogpost();
 
-         
-
-
                         $blogPostData = $blogpost_obj->findById($id);
                         $user_obj = new user();
                         $userData = $user_obj->findById($user_id);
-
-     
 
                         }
 
@@ -87,12 +79,15 @@
                                     <?php 
                                         echo $userData['name'];
                                      ?>
-
                                 </div>
                                 <!-- Post categories-->
-
-                                <a class="badge bg-secondary text-decoration-none link-light" href="#!">adsadads</a>
-
+                                <?php 
+                                    $category_types = new category_types();
+                                    $show_cat = $category_types->innerJoin($id);
+                                    foreach ($show_cat as $value) {
+                                 ?>
+                                <a class="badge bg-secondary text-decoration-none link-light" href="#!"><?php echo $value['name']; ?></a>
+                                <?php } ?>
                             </header>
                             <!-- Preview image figure-->
                             <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $blogPostData['img_link']; ?>" alt="..." /></figure>

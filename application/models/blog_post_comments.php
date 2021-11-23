@@ -20,8 +20,6 @@
         			//'blog_post_categories.*'
         		)
         	);
-
-        	 
             /*$joinString = $this->parseJoin();
             if($joinString != "") {
                 $sql .= $joinString;

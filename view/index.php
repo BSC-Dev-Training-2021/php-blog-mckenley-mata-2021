@@ -48,14 +48,22 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <?php require_once '../application/models/blogpost.php';
+                        
+                    if (isset($_GET['filter_id'])) {
+                        $blogpost_obj = new blogpost();
+                        $results=$blogpost_obj->filtering_innerJoin($_GET['filter_id']);
+                        
+                    }
+                    else{
+                        $blogpost_obj = new blogpost();
+                        $results=$blogpost_obj->findAll();
+                    }
                     
-                    $blogpost_obj= new blogpost();
-                    $results=$blogpost_obj->findAll();
+
 
 
                     foreach ($results as $value) { /// loop all the data from database
                     ?>
-
                     <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="<?php echo $value['img_link']; ?>" alt="..." /></a>
                         <div class="card-body">
@@ -151,13 +159,13 @@
                                     require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
+                                    
 
                                     foreach ($cat_types as $category_values) {
-                                
                                  ?>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!"><?php echo $category_values['name']; ?></a></li>
+                                        <li><a href="index.php?filter_id=<?php echo $category_values['name']; ?>"><?php echo $category_values['name']; ?></a></li>
                                 </div>
                                 <?php } ?>
                             </div>

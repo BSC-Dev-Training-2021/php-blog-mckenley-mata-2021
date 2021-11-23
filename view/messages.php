@@ -11,8 +11,8 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/font-awesome.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -77,12 +77,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    require_once 'models/category_type.php';
+                                    require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
 
                                     foreach ($cat_types as $category_values) {
-                                
                                  ?>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
