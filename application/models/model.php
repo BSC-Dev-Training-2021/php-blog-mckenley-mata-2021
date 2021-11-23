@@ -97,30 +97,37 @@
         }
 
 
-        function filtering_innerJoin($filter_id){
-            $sql="  SELECT * FROM $this->tableName
+        function filtering_innerJoin($cat_id){
+           /* $sql="  SELECT * 
+                    FROM $this->tableName
                     INNER JOIN blog_post_categories
                     ON blog_post_categories.blog_post_id = blog_post.id
                     INNER JOIN category_types
                     ON category_types.id = blog_post_categories.category_id
-                    where category_types.name = '$filter_id'
+                    where category_types.name = '$fil'
+            ";*/
+
+            $sql = "  SELECT 
+                        cat.id as cat_id, cat.name,
+                        blog.id as blog_id, blog.content, blog.title, blog.description, blog.img_link, blog.created_by, blog.date_created, blog.updated
+                    FROM category_types as cat
+                    LEFT JOIN blog_post_categories
+                    ON blog_post_categories.category_id = cat.id
+                    LEFT JOIN blog_post as blog
+                    ON blog.id = blog_post_categories.blog_post_id
+                    where cat.id = $cat_id
             ";
 
             $rows = $this->conn->query($sql);
-
-            return $rows;
+            
+             var_dump($rows);
+             die();
+            return $result;
         }
-
-
-
-
-
-
 
         function update($id, $fields){
 
         }
-
 
         function delete(){
 

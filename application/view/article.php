@@ -44,6 +44,7 @@ include '../controler/article_controler.php';
                             <!-- Post header-->
                             <header class="mb-4">
                                 <!-- Post title-->
+                                
                                 <h1 class="fw-bolder mb-1"><?php echo $blogPostData['title']; ?></h1>
                                 <!-- Post meta content-->
                                 <div class="text-muted fst-italic mb-2">Posted on <?php echo $blogPostData['date_created']; ?> by 
@@ -95,10 +96,10 @@ include '../controler/article_controler.php';
                                                 <?php 
                                                     echo $userData['name'];
                                                 ?>
+                                            </div>
+                                                <?php echo $value['comment']; ?>
                                         </div>
-                                            <?php echo $value['comment']; ?>
                                     </div>
-                                </div>
                                 <?php } ?>                            
                             </div>
                         </div>

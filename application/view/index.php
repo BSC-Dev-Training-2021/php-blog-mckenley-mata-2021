@@ -50,9 +50,18 @@ include '../controler/index_controler.php'; ?>
                     <!-- Featured blog post-->
                      <div class="row">
                     <?php 
-                    foreach ($results as $value) { /// loop all the data from database
-                    ?>
-                    <?php 
+                    if (isset($_GET['filter_id'])) {
+                        $blogpost_obj = new blogpost();
+                        $filtering_results=$blogpost_obj->filtering_innerJoin($_GET['filter_id']);
+                    }else{
+                        $blogpost_obj = new blogpost();
+                        $filtering_results=$blogpost_obj->findAll();  
+                    }
+
+                    $blog_val = 1;
+
+                    foreach ($filtering_results as $value) { /// loop all the data from database
+                    
                     if ($blog_val === 1){
                     ?>
                         <div class="card mb-4">
@@ -126,7 +135,9 @@ include '../controler/index_controler.php'; ?>
                                  ?>
                                     <div class="col-sm-6">
                                         <ul class="list-unstyled mb-0">
-                                            <li><a href="index.php?filter_id=<?php echo $category_values['name']; ?>"><?php echo $category_values['name']; ?></a>
+
+                                            
+                                            <li><a href="index.php?cat_id=<?php echo $category_values['id']; ?>"><?php echo $category_values['name']; ?></a>
                                             </li>
                                     </div>
                                 <?php } ?>
