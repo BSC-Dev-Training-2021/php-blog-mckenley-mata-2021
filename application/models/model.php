@@ -98,7 +98,7 @@
 
 
         function filtering_innerJoin($filter_id){
-            $sql="  SELECT * FROM blog_post
+            $sql="  SELECT * FROM $this->tableName
                     INNER JOIN blog_post_categories
                     ON blog_post_categories.blog_post_id = blog_post.id
                     INNER JOIN category_types
@@ -109,7 +109,6 @@
             $rows = $this->conn->query($sql);
 
             return $rows;
-
         }
 
 

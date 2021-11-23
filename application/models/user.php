@@ -1,6 +1,6 @@
 <?php
 require_once 'model.php';
-require_once '../application/models/blog_post_categories.php';
+require_once '../models/blog_post_categories.php';
 
     class user extends model {
 
