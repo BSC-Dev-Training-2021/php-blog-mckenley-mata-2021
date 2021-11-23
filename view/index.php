@@ -47,6 +47,7 @@
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
+                     <div class="row">
                     <?php require_once '../application/models/blogpost.php';
                         
                     if (isset($_GET['filter_id'])) {
@@ -59,11 +60,16 @@
                         $results=$blogpost_obj->findAll();
                     }
                     
-
+                    $blog_val=1;
 
 
                     foreach ($results as $value) { /// loop all the data from database
                     ?>
+                    <?php if ($blog_val===1){
+
+                    ?>
+                        
+                   
                     <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="<?php echo $value['img_link']; ?>" alt="..." /></a>
                         <div class="card-body">
@@ -75,54 +81,28 @@
                             </form>
                         </div>
                     </div>
-                    <?php } ?>
-
-                    <!-- Nested row for non-featured blog posts-->
-                    <div class="row">
+                    <!-- Nested row for non-featured blog posts--> 
+                    <?php 
+                        $blog_val=0;
+                    }else{
+                    ?>
+                   
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="<?php echo $value['img_link']; ?>" alt="..." /></a>
                                 <div class="card-body"> 
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="article.html">Read more →</a>
+                                    <div class="small text-muted"><?php echo $value['date_created']; ?></div>
+                                    <h2 class="card-title h4"><?php echo $value['title']; ?></h2>
+                                    <p class="card-text"><?php echo $value['description']; ?></p>
+                                    <a class="btn btn-primary" href="article.php?id=<?php echo $value['id']; ?>">Read more →</a>
                                 </div>
                             </div>
                             <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="article.html">Read more →</a>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="article.html">Read more →</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                    <a class="btn btn-primary" href="article.html">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
+                       
+                    
+                    <?php }} ?>
                     </div>
                     <!-- Pagination-->
                     <nav aria-label="Pagination">
@@ -159,7 +139,7 @@
                                     require_once '../application/models/category_type.php';
                                     $category_types = new category_types();
                                     $cat_types = $category_types->findAll();
-                                    
+
 
                                     foreach ($cat_types as $category_values) {
                                  ?>
