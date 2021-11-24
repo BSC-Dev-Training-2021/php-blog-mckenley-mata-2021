@@ -98,16 +98,25 @@
 
 
         function filtering_innerJoin($cat_id){
-           /* $sql="  SELECT * 
-                    FROM $this->tableName
-                    INNER JOIN blog_post_categories
-                    ON blog_post_categories.blog_post_id = blog_post.id
-                    INNER JOIN category_types
-                    ON category_types.id = blog_post_categories.category_id
-                    where category_types.name = '$fil'
-            ";*/
+            $sql="  SELECT 
+                            bp.id,
+                            bp.content,
+                            bp.title,
+                            bp.description,
+                            bp.img_link,
+                            bp.created_by,
+                            bp.date_created,
+                            bp.updated
+                    FROM blog_post bp
+                    INNER JOIN blog_post_categories bpc
+                    ON bpc.blog_post_id = bp.id
+                    INNER JOIN category_types ct
+                    ON ct.id  = bpc.category_id
+                    where ct.name = '$cat_id'";
+            
 
-            $sql = "  SELECT 
+
+            /*$sql = "  SELECT 
                         cat.id as cat_id, cat.name,
                         blog.id as blog_id, blog.content, blog.title, blog.description, blog.img_link, blog.created_by, blog.date_created, blog.updated
                     FROM category_types as cat
@@ -116,13 +125,12 @@
                     LEFT JOIN blog_post as blog
                     ON blog.id = blog_post_categories.blog_post_id
                     where cat.id = $cat_id
-            ";
-
+            ";*/
             $rows = $this->conn->query($sql);
             
-             var_dump($rows);
-             die();
-            return $result;
+            
+            
+            return $rows;
         }
 
         function update($id, $fields){

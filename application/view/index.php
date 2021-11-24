@@ -27,6 +27,7 @@ include '../controler/index_controler.php'; ?>
                         <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="category.php">Category</a></li>
                         <li class="nav-item"><a class="nav-link" href="post.php">Post</a></li>
                         <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
                     </ul>
@@ -50,18 +51,9 @@ include '../controler/index_controler.php'; ?>
                     <!-- Featured blog post-->
                      <div class="row">
                     <?php 
-                    if (isset($_GET['filter_id'])) {
-                        $blogpost_obj = new blogpost();
-                        $filtering_results=$blogpost_obj->filtering_innerJoin($_GET['filter_id']);
-                    }else{
-                        $blogpost_obj = new blogpost();
-                        $filtering_results=$blogpost_obj->findAll();  
-                    }
-
-                    $blog_val = 1;
 
                     foreach ($filtering_results as $value) { /// loop all the data from database
-                    
+
                     if ($blog_val === 1){
                     ?>
                         <div class="card mb-4">
@@ -71,7 +63,7 @@ include '../controler/index_controler.php'; ?>
                                 <h2 class="card-title"><?php echo $value['title']; ?></h2>
                                 <p class="card-text"><?php echo $value['description']; ?></p>
                                 <form method="post">
-                                    <a class="btn btn-primary" href="article.php?id=<?php echo $value['id']; ?> ">Read more →</a>
+                                    <a class="btn btn-primary" href="article.php?id=<?php echo $value['id'];?> ">Read more →</a>
                                 </form>
                             </div>
                         </div>
@@ -137,7 +129,7 @@ include '../controler/index_controler.php'; ?>
                                         <ul class="list-unstyled mb-0">
 
                                             
-                                            <li><a href="index.php?cat_id=<?php echo $category_values['id']; ?>"><?php echo $category_values['name']; ?></a>
+                                            <li><a href="index.php?cat_id=<?php echo $category_values['name']; ?>"><?php echo $category_values['name']; ?></a>
                                             </li>
                                     </div>
                                 <?php } ?>

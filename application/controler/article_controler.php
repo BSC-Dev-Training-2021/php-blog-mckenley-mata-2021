@@ -37,11 +37,6 @@
     $blog_post_comments = new blog_post_comments();
     $blog_post_result = $blog_post_comments->findComments($int_num);
 
-
-    /// show all the categories
-    $category_types = new category_types();
-    $cat_types = $category_types->findAll();
-
 ?>
 
 

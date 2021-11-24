@@ -1,5 +1,5 @@
 <?php 
-    include '../controler/contact_controler.php';
+    include '../controler/category_controler.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +27,10 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="contact.php">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="category.php">Category</a></li>
                         <li class="nav-item"><a class="nav-link" href="post.php">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -38,37 +38,25 @@
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-8 align-self-start">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <!-- Contact Us header-->
-                            <header class="mb-4">
-                                <!-- Post title-->
-                                <h1 class="fw-bolder mb-1">Contact Us</h1>
-                                <!-- Post meta content-->
-                                <div class="text-muted fst-italic mb-3">We would like to hear from you!</div>
-                            </header>
-                            <!-- Post content-->
-                            <section class="mb-5">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput" class="mb-1">Full Name</label>
-                                        <input type="text" class="form-control mb-1" id="formGroupExampleInput" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput2" class="mb-1">Email</label>
-                                        <input type="text" class="form-control mb-1" id="formGroupExampleInput2" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" class="mb-1">Message</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                                </form>
-                            </section>
+                <div class="col-lg-8">
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">Category</h1>
+                    </header>
+                    <!-- Submitted messages -->
+                    <section>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <li class="list-group-item">
+                                            <?php echo $cat_values['name']; ?>
+                                            <input type="text" name="cat_id" value="<?php echo $cat_values['id'] ?>">
+                                            <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
+                                            <button type="submit" class="btn btn-danger float-right" name="delete-btn">Delete</button>
+                                        </li>
+                            </div>
                         </div>
-                        <div class="col-lg-4"></div>
-                    </div>
+                    </section>
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
