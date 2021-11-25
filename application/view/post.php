@@ -21,23 +21,7 @@ include '../controler/post_controler.php';
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#!">My Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="category.php">Category</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="post.php">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include 'header.php'; ?>
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
@@ -115,12 +99,8 @@ include '../controler/post_controler.php';
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    require_once '../models/category_type.php';
-                                    $category_types = new category_types();
-                                    $cat_types = $category_types->findAll();
 
                                     foreach ($cat_types as $category_values) {
-                                
                                  ?>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
@@ -138,12 +118,6 @@ include '../controler/post_controler.php';
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <?php include 'footer.php'; ?>
     </body>
 </html>

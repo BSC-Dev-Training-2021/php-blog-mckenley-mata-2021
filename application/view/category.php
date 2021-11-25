@@ -19,22 +19,7 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#!">My Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="category.php">Category</a></li>
-                        <li class="nav-item"><a class="nav-link" href="post.php">Post</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include 'header.php'; ?>
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
@@ -44,17 +29,31 @@
                         <!-- Post title-->
                         <h1 class="fw-bolder mb-1">Category</h1>
                     </header>
+                    <div class="card mb-4">
+                        <form method="post" action="category.php">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Insert your category here." aria-label="Enter search term..." aria-describedby="button-search" name="add_cat" required  />
+                                <button class="btn btn-primary" id="button-search" type="submit" name="btn_add_cat">Add Category</button>
+                            </div>
+                        </form>
+                    </div>
                     <!-- Submitted messages -->
                     <section>
                         <div class="card mb-2">
+                            <?php 
+                                foreach ($cat_val as $cat_values) { 
+                            ?>
                             <div class="card-body">
-                                <li class="list-group-item">
-                                            <?php echo $cat_values['name']; ?>
-                                            <input type="text" name="cat_id" value="<?php echo $cat_values['id'] ?>">
+                                <form method="post">
+                                    <li class="list-group-item">
+                                        <?php echo $cat_values['name']; ?>
+                                            <input type="hidden" name="cat_id" value="<?php echo $cat_values['id'] ?>">
                                             <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
                                             <button type="submit" class="btn btn-danger float-right" name="delete-btn">Delete</button>
-                                        </li>
+                                    </li>
+                                </form>  
                             </div>
+                            <?php } ?>
                         </div>
                     </section>
                 </div>
@@ -95,12 +94,6 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <?php include 'footer.php'; ?>
     </body>
 </html>

@@ -17,23 +17,7 @@ include '../controler/index_controler.php'; ?>
         <link href="../../css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#!">My Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="category.php">Category</a></li>
-                        <li class="nav-item"><a class="nav-link" href="post.php">Post</a></li>
-                        <li class="nav-item"><a class="nav-link" href="messages.php"><i class="fa fa-envelope-o"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include'header.php'; ?>
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
@@ -51,7 +35,6 @@ include '../controler/index_controler.php'; ?>
                     <!-- Featured blog post-->
                      <div class="row">
                     <?php 
-
                     foreach ($filtering_results as $value) { /// loop all the data from database
 
                     if ($blog_val === 1){
@@ -87,9 +70,8 @@ include '../controler/index_controler.php'; ?>
                             </div>
                             <!-- Blog post-->
                         </div>
-
-                    <?php }} ?>
-
+                    <?php   }
+                        } ?>
                     </div>
                     <!-- Pagination-->
                     <nav aria-label="Pagination">
@@ -127,8 +109,6 @@ include '../controler/index_controler.php'; ?>
                                  ?>
                                     <div class="col-sm-6">
                                         <ul class="list-unstyled mb-0">
-
-                                            
                                             <li><a href="index.php?cat_id=<?php echo $category_values['name']; ?>"><?php echo $category_values['name']; ?></a>
                                             </li>
                                     </div>
@@ -144,13 +124,6 @@ include '../controler/index_controler.php'; ?>
                 </div>
             </div>
         </div>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <?php include 'footer.php'; ?>
     </body>
 </html>

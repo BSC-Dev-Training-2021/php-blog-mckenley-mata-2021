@@ -37,6 +37,9 @@
     $blog_post_comments = new blog_post_comments();
     $blog_post_result = $blog_post_comments->findComments($int_num);
 
+    ///show all category on cat-widget
+    $cat_types = $category_types->findAll();
+
 ?>
 
 
