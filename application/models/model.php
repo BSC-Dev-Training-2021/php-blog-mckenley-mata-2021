@@ -15,8 +15,6 @@
             $this->id = 0;
         }
 
-       
-
         function findAll($options = array()){
             $sql = "SELECT * FROM $this->tableName";
 
@@ -99,15 +97,15 @@
 
         function filtering_innerJoin($cat_id){
             $sql="  SELECT 
-                            bp.id,
-                            bp.content,
-                            bp.title,
-                            bp.description,
-                            bp.img_link,
-                            bp.created_by,
-                            bp.date_created,
-                            bp.updated
-                    FROM blog_post bp
+                        bp.id,
+                        bp.content,
+                        bp.title,
+                        bp.description,
+                        bp.img_link,
+                        bp.created_by,
+                        bp.date_created,
+                        bp.updated
+                    FROM $this->tableName bp
                     INNER JOIN blog_post_categories bpc
                     ON bpc.blog_post_id = bp.id
                     INNER JOIN category_types ct
@@ -127,8 +125,6 @@
                     where cat.id = $cat_id
             ";*/
             $rows = $this->conn->query($sql);
-            
-            
             
             return $rows;
         }

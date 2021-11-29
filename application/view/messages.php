@@ -66,8 +66,6 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php 
-                                    
-
                                     foreach ($cat_types as $category_values) {
                                  ?>
                                 <div class="col-sm-6">
